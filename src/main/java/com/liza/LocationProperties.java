@@ -8,7 +8,8 @@ import java.util.List;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties("locations.yml")
+@ConfigurationProperties
+//todo rename property file
 public class LocationProperties {
 
     private List<Country> countries;

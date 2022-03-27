@@ -22,7 +22,7 @@ public class Controller {
     WeatherRepository weatherRepository;
 
     @GetMapping("/weathers")
-    public ResponseEntity<List<Weather>> getCurrent(@RequestParam(required = true) String city, @RequestParam(required = true) String country, @RequestParam("date")
+    public ResponseEntity<List<Weather>> getCurrent(@RequestParam(required = true) String city, @RequestParam(required = true) String country, @RequestParam(required = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         try {
             List<Weather> result = new ArrayList<Weather>();

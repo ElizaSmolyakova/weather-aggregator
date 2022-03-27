@@ -1,6 +1,6 @@
 countries:
   -
-    name: UK
+    name: GB
     cities:
       - London
       - Liverpool
@@ -8,5 +8,4 @@ countries:
     name: RU
     cities:
       - Moscow
-      - Petersburg
 

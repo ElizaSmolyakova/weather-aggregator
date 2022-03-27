@@ -1,27 +1,20 @@
 package com.liza;
 
-import com.liza.controller.RecordController;
-import com.liza.dao.Weather;
-import com.liza.dao.WeatherRepository;
-import com.liza.domain.Record;
+import com.liza.service.WeatherAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Scanner;
 
 @SpringBootApplication
+@EnableScheduling
 public class Application implements CommandLineRunner {
 
     @Autowired
-    RecordController controller;
-
-    @Autowired
-    WeatherRepository repository;
-
-    @Autowired
-    private LocationProperties props;
+    WeatherAggregator weatherAggregator;
 
     @Override
     public void run(String... args) throws Exception {
@@ -32,9 +25,11 @@ public class Application implements CommandLineRunner {
         while (true) {
             switch (console.next()) {
                 case "1":
-                    Record record = controller.get();
-                    repository.save(new Weather(record.getCity(), record.getCountry(), record.getTime(), record.getTemperature()));
-                    System.out.println(record);
+                    try {
+                        weatherAggregator.calculateWeather();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 default:
