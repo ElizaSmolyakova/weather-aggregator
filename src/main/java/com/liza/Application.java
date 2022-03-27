@@ -20,6 +20,9 @@ public class Application implements CommandLineRunner {
     @Autowired
     WeatherRepository repository;
 
+    @Autowired
+    private LocationProperties props;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("hi");

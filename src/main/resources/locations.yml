@@ -1,0 +1,12 @@
+countries:
+  -
+    name: UK
+    cities:
+      - London
+      - Liverpool
+  -
+    name: RU
+    cities:
+      - Moscow
+      - Petersburg
+
