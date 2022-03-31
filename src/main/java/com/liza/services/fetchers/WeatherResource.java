@@ -1,4 +1,4 @@
-package com.liza.service;
+package com.liza.services.fetchers;
 
 public interface WeatherResource {
 

@@ -1,4 +1,4 @@
-package com.liza.service;
+package com.liza.services.fetchers.openWeather;
 
 public class Response {
     private int status;

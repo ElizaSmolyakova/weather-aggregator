@@ -1,6 +1,8 @@
-package com.liza.dao;
+package com.liza.rest;
 
 
+import com.liza.dao.Weather;
+import com.liza.dao.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,10 @@ import java.util.List;
 public class Controller {
     @Autowired
     WeatherRepository weatherRepository;
+
+    public Controller(WeatherRepository weatherRepository) {
+        this.weatherRepository = weatherRepository;
+    }
 
     @GetMapping("/weathers")
     public ResponseEntity<List<Weather>> getCurrent(@RequestParam(required = true) String city, @RequestParam(required = true) String country, @RequestParam(required = false)

@@ -1,9 +1,9 @@
-package com.liza.service;
+package com.liza.services.aggregator;
 
 import com.liza.LocationProperties;
 import com.liza.dao.Weather;
 import com.liza.dao.WeatherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.liza.services.fetchers.WeatherResource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +13,23 @@ import java.util.List;
 
 @Service
 public class WeatherAggregator {
-    @Autowired
+
+//    @Autowired
     private LocationProperties props;
 
-    @Autowired
+//    @Autowired
     private List<WeatherResource> resources;
 
-    @Autowired
+//    @Autowired
     WeatherRepository repository;
 
-    @Scheduled(cron = "0 * * * * *")
+    public WeatherAggregator(LocationProperties props, List<WeatherResource> resources, WeatherRepository repository) {
+        this.props = props;
+        this.resources = resources;
+        this.repository = repository;
+    }
+
+    @Scheduled(cron = "${cron.expression}")
     public void calculateWeather() {
         props.getCountries().forEach(country -> {
             country.getCities().forEach(city -> {
@@ -34,5 +41,5 @@ public class WeatherAggregator {
                 });
             });
         });
-    };
+    }
 }
