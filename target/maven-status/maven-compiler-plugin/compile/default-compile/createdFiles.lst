@@ -1,9 +1,0 @@
-com\liza\dao\WeatherRepository.class
-com\liza\service\Body.class
-com\liza\service\RecordService.class
-com\liza\domain\Record.class
-com\liza\dao\Weather.class
-com\liza\service\Response.class
-com\liza\Application.class
-com\liza\controller\RecordController.class
-com\liza\dao\Controller.class
