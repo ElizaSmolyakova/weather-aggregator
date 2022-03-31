@@ -34,7 +34,13 @@ public class WeatherRepositoryTest {
     }
 
     @Test
+    //todo
     public void shouldReturnAllDateDat(){
+    }
+
+    @Test
+    //todo test findTop1ByCityAndCountryOrderByTimeDesc
+    public void shouldReturnLatestData(){
 
     }
 
