@@ -28,10 +28,14 @@ public class WeatherRepositoryTest {
     }
 
     @Test
-    //todo fix the test
     public void shouldGetNoResultWhenEmpty() {
         List<Weather> allForDate = repo.getAllForDate("London", "GB", "2022-02-02");
-        assertEquals(allForDate, 0);
+        assertEquals(allForDate.size(), 0);
+    }
+
+    @Test
+    public void shouldReturnAllDateDat(){
+
     }
 
 }
