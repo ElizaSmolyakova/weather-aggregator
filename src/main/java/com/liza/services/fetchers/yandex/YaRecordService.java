@@ -4,13 +4,13 @@ import com.liza.services.fetchers.WeatherResource;
 import com.liza.services.fetchers.WeatherResponse;
 import com.liza.services.fetchers.openWeather.Response;
 import org.springframework.http.*;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 
 import java.net.URI;
 
-@Service
+//todo fix
+//@Service
 public class YaRecordService implements WeatherResource {
 
     //can be moved to property file
