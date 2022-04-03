@@ -71,11 +71,10 @@ public class ControllerTest {
     }
 
     @Test
-    //todo
     public void shouldReturnErrorWhenException() {
-//        when(repository.findTop1ByCityAndCountryOrderByTimeDesc("Moscow", "RU")).thenThrow(new Exception("test exception"));
-//        ResponseEntity<List<Weather>> result = rest.getCurrent("Moscow", "RU", null);
-//        assertEquals(result.getStatusCode(), HttpStatus.OK);
+        when(repository.findTop1ByCityAndCountryOrderByTimeDesc("Moscow", "RU")).thenThrow(new RuntimeException("test exception"));
+        ResponseEntity<List<Weather>> result = rest.getCurrent("Moscow", "RU", null);
+        assertEquals(result.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 
