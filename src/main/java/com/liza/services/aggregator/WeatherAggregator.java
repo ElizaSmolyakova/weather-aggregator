@@ -4,6 +4,7 @@ import com.liza.LocationProperties;
 import com.liza.dao.Weather;
 import com.liza.dao.WeatherRepository;
 import com.liza.services.fetchers.WeatherResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,8 @@ public class WeatherAggregator {
         props.getCountries().forEach(country -> {
             country.getCities().forEach(city -> {
                 resources.stream()
-                        .mapToDouble( resource -> resource.getWeather(city, country.getName()))
+                        .filter( resource -> resource.getWeather(city, country.getName()).getStatus()== HttpStatus.OK)
+                        .mapToDouble( resource -> resource.getWeather(city, country.getName()).getValue())
                         .average()
                 .ifPresent(avg -> {
                     repository.save(new Weather(city, country.getName(), Timestamp.from(Instant.now()) , avg));

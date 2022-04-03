@@ -4,10 +4,12 @@ import com.liza.LocationProperties;
 import com.liza.dao.Weather;
 import com.liza.dao.WeatherRepository;
 import com.liza.services.fetchers.WeatherResource;
+import com.liza.services.fetchers.WeatherResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,19 +42,28 @@ public class WeatherAggregatorTest {
     @Test
     public void shouldCalculateResult() {
         WeatherAggregator calculator = new WeatherAggregator(props, resources, repository);
-        when(resource1.getWeather("Moscow","RU")).thenReturn(23.5);
-        when(resource2.getWeather("Moscow","RU")).thenReturn(26.5);
+        when(resource1.getWeather("Moscow","RU")).thenReturn(new WeatherResponse(HttpStatus.OK,23.5));
+        when(resource2.getWeather("Moscow","RU")).thenReturn(new WeatherResponse(HttpStatus.OK,26.5));
         calculator.calculateWeather();
         verify(repository).save(new Weather("Moscow","RU", any(), 25.0 ));
     }
 
     @Test
     public void shouldCalculateWhenOneResourceIsOff() {
-        //todo
-     }
+        WeatherAggregator calculator = new WeatherAggregator(props, resources, repository);
+        when(resource1.getWeather("Moscow","RU")).thenReturn(new WeatherResponse(HttpStatus.OK,23.5));
+        when(resource2.getWeather("Moscow","RU")).thenReturn(new WeatherResponse(HttpStatus.NO_CONTENT,null));
+        calculator.calculateWeather();
+        verify(repository).save(new Weather("Moscow","RU", any(), 23.5 ));
+
+    }
 
     @Test
     public void shouldNotCalculateWhenAllResourcesAreOff() {
-        //todo
+        WeatherAggregator calculator = new WeatherAggregator(props, resources, repository);
+        when(resource1.getWeather("Moscow","RU")).thenReturn(new WeatherResponse(HttpStatus.NO_CONTENT,null));
+        when(resource2.getWeather("Moscow","RU")).thenReturn(new WeatherResponse(HttpStatus.NO_CONTENT,null));
+        calculator.calculateWeather();
+        verify(repository, never()).save(new Weather("Moscow","RU", any(), 25.0 ));
     }
 }

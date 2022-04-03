@@ -71,8 +71,12 @@ public class ControllerTest {
     }
 
     @Test
+    //todo
     public void shouldReturnErrorWhenException() {
-        //todo
+//        when(repository.findTop1ByCityAndCountryOrderByTimeDesc("Moscow", "RU")).thenThrow(new Exception("test exception"));
+//        ResponseEntity<List<Weather>> result = rest.getCurrent("Moscow", "RU", null);
+//        assertEquals(result.getStatusCode(), HttpStatus.OK);
+
     }
 
 }
